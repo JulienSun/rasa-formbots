@@ -1,122 +1,138 @@
-version: "2.0"
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
 intents:
-  - request_restaurant:
-      use_entities: []
-  - chitchat:
-      use_entities: []
-  - inform
-  - affirm
-  - deny
-  - stop
-  - thankyou
-  - greet
-  - bot_challenge
-
+- request_restaurant:
+    use_entities: []
+- chitchat:
+    use_entities: []
+- inform:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- stop:
+    use_entities: true
+- thankyou:
+    use_entities: true
+- greet:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
 entities:
-  - cuisine
-  - number
-  - feedback
-  - seating
-
+- cuisine
+- number
+- feedback
+- seating
 slots:
   cuisine:
-    type: text
-    influence_conversation: false
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
     auto_fill: false
+    influence_conversation: false
   num_people:
-    type: float
-    influence_conversation: false
+    type: rasa.shared.core.slots.FloatSlot
+    initial_value: null
     auto_fill: false
+    influence_conversation: false
+    max_value: 1.0
+    min_value: 0.0
   outdoor_seating:
-    type: text
-    influence_conversation: false
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
     auto_fill: false
+    influence_conversation: false
   preferences:
-    type: text
-    influence_conversation: false
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
     auto_fill: false
+    influence_conversation: false
   feedback:
-    type: text
-    influence_conversation: false
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
     auto_fill: false
-  requested_slot:
-    type: text
     influence_conversation: false
-
+  requested_slot:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
 responses:
   utter_ask_cuisine:
-    - text: "What cuisine?"
+  - text: What cuisine?
   utter_ask_num_people:
-    - text: "How many people?"
+  - text: How many people?
   utter_ask_outdoor_seating:
-    - text: "Do you want to sit outside?"
+  - text: Do you want to sit outside?
   utter_ask_preferences:
-    - text: "Please provide additional preferences"
+  - text: Please provide additional preferences
   utter_ask_feedback:
-    - text: "Please give your feedback on your experience so far"
+  - text: Please give your feedback on your experience so far
   utter_submit:
-  - text: "All done!"
+  - text: All done!
   utter_slots_values:
-    - text: "I am going to run a restaurant search using the following parameters:\n
-             - cuisine: {cuisine}\n
-             - num_people: {num_people}\n
-             - outdoor_seating: {outdoor_seating}\n
-             - preferences: {preferences}\n
-             - feedback: {feedback}"
+  - text: |-
+      I am going to run a restaurant search using the following parameters:
+       - cuisine: {cuisine}
+       - num_people: {num_people}
+       - outdoor_seating: {outdoor_seating}
+       - preferences: {preferences}
+       - feedback: {feedback}
   utter_noworries:
-    - text: "You are welcome :)"
+  - text: You are welcome :)
   utter_chitchat:
-    - text: "chitchat"
+  - text: chitchat
   utter_ask_continue:
-    - text: "Do you want to continue?"
+  - text: Do you want to continue?
   utter_wrong_cuisine:
-    - text: "Cuisine type is not in the database, please try again"
+  - text: Cuisine type is not in the database, please try again
   utter_wrong_num_people:
-    - text: "Number of people should be a positive integer, please try again"
+  - text: Number of people should be a positive integer, please try again
   utter_wrong_outdoor_seating:
-    - text: "Could not convert input to boolean value, please try again"
+  - text: Could not convert input to boolean value, please try again
   utter_default:
-    - text: "Sorry, I didn't understand you, please try input something else"
+  - text: Sorry, I didn't understand you, please try input something else
   utter_greet:
-    - text: "Hello! I am restaurant search assistant! How can I help?"
+  - text: Hello! I am restaurant search assistant! How can I help?
   utter_iamabot:
-    - text: "I am a bot, powered by Rasa."
+  - text: I am a bot, powered by Rasa.
   utter_restart:
-    - text: "restarted"
-
+  - text: restarted
 actions:
 - validate_restaurant_form
-
 forms:
   restaurant_form:
     cuisine:
-    - type: from_entity
-      entity: cuisine
+    - entity: cuisine
       not_intent: chitchat
+      type: from_entity
+    feedback:
+    - entity: feedback
+      type: from_entity
+    - type: from_text
     num_people:
-    - type: from_entity
-      entity: number
-      intent: [inform, request_restaurant]
+    - entity: number
+      intent:
+      - inform
+      - request_restaurant
+      type: from_entity
     outdoor_seating:
-    - type: from_entity
-      entity: seating
-    - type: from_intent
-      intent: affirm
+    - entity: seating
+      type: from_entity
+    - intent: affirm
+      type: from_intent
       value: true
-    - type: from_intent
-      intent: deny
+    - intent: deny
+      type: from_intent
       value: false
     preferences:
-    - type: from_intent
-      intent: deny
+    - intent: deny
+      type: from_intent
       value: no additional preferences
-    - type: from_text
-      not_intent: affirm
-    feedback:
-    - type: from_entity
-      entity: feedback
-    - type: from_text
-
-session_config:
-  session_expiration_time: 60  # value in minutes
-  carry_over_slots_to_new_session: true
+    - not_intent: affirm
+      type: from_text
+e2e_actions: []

@@ -30,7 +30,6 @@ nlu:
     - hi?
     - hey bot!
     - hello friend
-
 - intent: request_restaurant
   examples: |
     - im looking for a restaurant
@@ -53,7 +52,6 @@ nlu:
     - looking for a table at the [mexican](cuisine) restaurant for [five](number)
     - find me a table for [7](number) people
     - Can I get a table for [four](number) at the place which server [greek](cuisine) food?
-
 - intent: affirm
   examples: |
     - yeah a cheap restaurant serving international food
@@ -62,7 +60,6 @@ nlu:
     - uh yes
     - let's do it
     - yeah
-    - uh yes
     - um yes
     - yes knocking
     - that's correct
@@ -74,7 +71,6 @@ nlu:
     - yes and i dont care
     - right on
     - i love that
-
 - intent: deny
   examples: |
     - no
@@ -85,7 +81,6 @@ nlu:
     - breath no
     - do you have something else
     - no this does not work for me
-
 - intent: inform
   examples: |
     - [afghan](cuisine) food
@@ -103,7 +98,7 @@ nlu:
     - um what about [italian](cuisine) food
     - im looking for [corsica](cuisine) food
     - im looking for [world](cuisine) food
-    -  serves [french](cuisine) food
+    - serves [french](cuisine) food
     - how about [indian](cuisine) food
     - can i get [chinese](cuisine) food
     - [irish](cuisine) food
@@ -113,7 +108,7 @@ nlu:
     - [german](cuisine)
     - [korean](cuisine) food
     - im looking for [romanian](cuisine) food
-    -  serves [canapes](cuisine) food
+    - serves [canapes](cuisine) food
     - [gastropub](cuisine)
     - i want [french](cuisine) food
     - how about [modern european](cuisine) type of food
@@ -146,20 +141,20 @@ nlu:
     - im looking for [belgian](cuisine) food
     - im looking for [turkish](cuisine) food
     - serving [corsica](cuisine) food
-    - serving [gastro pub](cuisine:gastropub)
+    - serving [gastro pub]{"entity": "cuisine", "value": "gastropub"}
     - is there [british](cuisine) food
     - [world](cuisine) food
     - im looking for something serves [japanese](cuisine) food
     - id like a [greek](cuisine)
     - im looking for [malaysian](cuisine) food
     - i want to find [world](cuisine) food
-    - serves [pan asian](cuisine:asian) food
+    - serves [pan asian]{"entity": "cuisine", "value": "asian"} food
     - looking for [afghan](cuisine) food
     - that serves [portuguese](cuisine) food
-    - [asian oriental](cuisine:asian) food
+    - [asian oriental]{"entity": "cuisine", "value": "asian"} food
     - [russian](cuisine) food
     - [corsica](cuisine)
-    - [asian oriental](cuisine:asian)
+    - [asian oriental]{"entity": "cuisine", "value": "asian"}
     - serving [basque](cuisine) food
     - how about [italian](cuisine)
     - looking for [spanish](cuisine) food in the center of town
@@ -168,7 +163,6 @@ nlu:
     - i want [vegetarian](cuisine) food
     - im looking for [swedish](cuisine) food
     - um how about [chinese](cuisine) food
-    - [world](cuisine) food
     - can i have a [seafood](cuisine) please
     - how about [italian](cuisine) food
     - how about [korean](cuisine)
@@ -181,7 +175,6 @@ nlu:
     - [tuscan](cuisine) food
     - how about uh [gastropub](cuisine)
     - im looking for [creative](cuisine) food
-    - im looking for [malaysian](cuisine) food
     - im looking for [unusual](cuisine) food
     - [danish](cuisine) food
     - how about [spanish](cuisine) food
@@ -216,7 +209,7 @@ nlu:
     - book for [seven](number) people
     - [2](number) please
     - [nine](number) people
-
+    - i want [cheap](cuisine) food
 - intent: thankyou
   examples: |
     - um thank you good bye
@@ -246,7 +239,6 @@ nlu:
     - uh okay thank you good bye
     - thank you bye
     - um okay thank you good bye
-
 - intent: chitchat
   examples: |
     - can you share your boss with me?
@@ -286,7 +278,6 @@ nlu:
     - Beautiful day, isn't it?
     - What's the weather forecast?
     - Is it quite breezy outside?
-
 - intent: stop
   examples: |
     - ok then you cant help me
@@ -308,10 +299,16 @@ nlu:
     - and you call yourself bot company? pff
     - and that's it?
     - nothing else?
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+- synonym: gastropub
+  examples: |
+    - gastro pub
+- synonym: asian
+  examples: |
+    - pan asian
+    - asian oriental
